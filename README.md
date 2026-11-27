@@ -4,7 +4,7 @@
 
 </div>
 
-<img src="assets/divider.svg" alt="" width="100%">
+<img src="assets/divider-v2.svg" alt="" width="100%">
 
 | | Demo | Made with | What happens |
 |---|---|---|---|
@@ -13,7 +13,7 @@
 | 🚨 | **no-em-dash-club** | Go | A rainbow siren for em dashes. *Soon.* |
 | 🌱 | **note-garden** | Rust | A garden grown from your notes. *Soon.* |
 
-<img src="assets/divider.svg" alt="" width="100%">
+<img src="assets/divider-v2.svg" alt="" width="100%">
 
 <details>
 <summary><b>🔧 How was this banner made?</b></summary>
