@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 24" width="1200" height="24" aria-hidden="true">
+  <defs>
+    <linearGradient id="rb" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#ff2ea6"/>
+      <stop offset="0.3" stop-color="#ffe566"/>
+      <stop offset="0.6" stop-color="#8dff4d"/>
+      <stop offset="0.8" stop-color="#27e8ff"/>
+      <stop offset="1"   stop-color="#a259ff"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .dash { stroke-dasharray: 18 12; }
+    @media (prefers-reduced-motion: no-preference) {
+      .dash { animation: march 2.4s linear infinite; }
+      .tw   { animation: tw 2.4s ease-in-out infinite; }
+      .tw:nth-of-type(2) { animation-delay: 0.8s; }
+    }
+    @keyframes march { to { stroke-dashoffset: -60; } }
+    @keyframes tw { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  </style>
+  <line class="dash" x1="0" y1="12" x2="1200" y2="12" stroke="url(#rb)" stroke-width="4" stroke-linecap="round"/>
+  <path class="tw" d="M600 2 l3 8 8 2 -8 2 -3 8 -3 -8 -8 -2 8 -2z" fill="#ffffff"/>
+  <path class="tw" d="M300 6 l2 5 5 1 -5 1 -2 5 -2 -5 -5 -1 5 -1z" fill="#ffffff"/>
+  <path class="tw" d="M900 6 l2 5 5 1 -5 1 -2 5 -2 -5 -5 -1 5 -1z" fill="#ffffff"/>
+</svg>

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d">
+  <title id="t">GlitchGlam</title>
+  <desc id="d">The word GlitchGlam in big glowing letters that briefly glitch with pink and cyan colour splits. A small magpie flies across the top.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0422"/>
+      <stop offset="1" stop-color="#26095a"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#ff5cc0"/>
+      <stop offset="0.5" stop-color="#ffe566"/>
+      <stop offset="1"   stop-color="#4df0ff"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"  stop-color="#7b2cff"/>
+      <stop offset=".5" stop-color="#1d9bff"/>
+      <stop offset="1"  stop-color="#19f0a8"/>
+    </linearGradient>
+    <linearGradient id="sweep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <pattern id="lines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1.5" fill="#000" fill-opacity="0.22"/>
+    </pattern>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="50"/></filter>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="11" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    text { font-family: "Avenir Next", "Trebuchet MS", Verdana, system-ui, sans-serif; }
+    .cy { transform: translate(-3px, 0); }
+    .mg { transform: translate(3px, 0); }
+    .bird { transform: translate(940px, 26px); }
+    .wing { transform-origin: 70px 54px; }
+
+    /* All motion is opt-out: it only runs for people who have not asked for less. */
+    @media (prefers-reduced-motion: no-preference) {
+      .b1 { animation: d1 13s ease-in-out infinite alternate; }
+      .b2 { animation: d2 17s ease-in-out infinite alternate; }
+      .b3 { animation: d3 15s ease-in-out infinite alternate; }
+      .cy { animation: glc 6s steps(1, end) infinite; }
+      .mg { animation: glm 6s steps(1, end) infinite; }
+      .main { animation: glt 6s steps(1, end) infinite; }
+      .scan { animation: scan 7s linear infinite; }
+      .bird { animation: fly 20s linear infinite; }
+      .bob  { animation: bob 1.3s ease-in-out infinite alternate; }
+      .wing { animation: flap 0.26s ease-in-out infinite alternate; }
+      .tw   { animation: tw 2.6s ease-in-out infinite; }
+      .tw:nth-of-type(2n) { animation-delay: 0.9s; }
+      .tw:nth-of-type(3n) { animation-delay: 1.7s; }
+    }
+    @keyframes d1 { to { transform: translate(200px, 40px); } }
+    @keyframes d2 { to { transform: translate(-240px, -30px); } }
+    @keyframes d3 { to { transform: translate(140px, -50px); } }
+    @keyframes scan { from { transform: translateY(-120px); } to { transform: translateY(330px); } }
+    @keyframes fly  { from { transform: translate(-220px, 40px); } to { transform: translate(1320px, 18px); } }
+    @keyframes bob  { to { transform: translateY(14px); } }
+    @keyframes flap { from { transform: rotate(-28deg) scaleY(1.1); } to { transform: rotate(22deg) scaleY(0.8); } }
+    @keyframes tw   { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+    /* The glitch: quiet for most of the loop, then a short burst of sliced colour channels. */
+    @keyframes glc {
+      0%, 86%  { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
+      87%      { transform: translate(-22px, 2px); clip-path: inset(8% 0 62% 0); }
+      89%      { transform: translate(18px, -2px); clip-path: inset(58% 0 10% 0); }
+      91%      { transform: translate(-12px, 0);  clip-path: inset(30% 0 38% 0); }
+      93%      { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
+      100%     { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
+    }
+    @keyframes glm {
+      0%, 86%  { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
+      87%      { transform: translate(20px, -2px); clip-path: inset(50% 0 18% 0); }
+      89%      { transform: translate(-16px, 2px); clip-path: inset(12% 0 56% 0); }
+      91%      { transform: translate(14px, 0);   clip-path: inset(66% 0 4% 0); }
+      93%      { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
+      100%     { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
+    }
+    @keyframes glt {
+      0%, 86%  { transform: translate(0, 0) skewX(0deg); }
+      88%      { transform: translate(6px, 0) skewX(-7deg); }
+      90%      { transform: translate(-5px, 0) skewX(4deg); }
+      92%      { transform: translate(0, 0) skewX(0deg); }
+      100%     { transform: translate(0, 0) skewX(0deg); }
+    }
+  </style>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <rect width="1200" height="300" fill="url(#grid)"/>
+
+  <g filter="url(#blur)" opacity="0.6">
+    <circle class="b1" cx="170"  cy="100" r="130" fill="#ff2e93"/>
+    <circle class="b2" cx="1000" cy="290" r="140" fill="#27e8ff"/>
+    <circle class="b3" cx="600"  cy="290" r="110" fill="#8dff4d"/>
+  </g>
+
+  <g fill="#ffffff">
+    <path class="tw" d="M90 46 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z"/>
+    <path class="tw" d="M230 246 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
+    <path class="tw" d="M740 70 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
+    <path class="tw" d="M1110 230 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z"/>
+    <path class="tw" d="M940 252 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
+    <path class="tw" d="M1030 100 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
+  </g>
+
+  <!-- CRT feel sits BEHIND the words, so the text stays crisp and easy to read. -->
+  <rect class="scan" x="0" y="0" width="1200" height="120" fill="url(#sweep)"/>
+  <rect width="1200" height="300" fill="url(#lines)"/>
+
+  <!-- The title: a soft glow, then cyan and pink copies that slip out during a glitch, then the real word on top. -->
+  <g font-size="156" font-weight="900" letter-spacing="-3" text-anchor="middle">
+    <text x="600" y="198" fill="url(#ink)" filter="url(#glow)" opacity="0.55">GlitchGlam</text>
+    <text class="cy" x="600" y="198" fill="#27e8ff">GlitchGlam</text>
+    <text class="mg" x="600" y="198" fill="#ff2ea6">GlitchGlam</text>
+    <text class="main" x="600" y="198" fill="url(#ink)">GlitchGlam</text>
+  </g>
+
+  <!-- A small magpie. Decorative. -->
+  <g class="bird">
+    <g class="bob">
+      <g transform="scale(0.62)">
+        <path d="M34 60 L2 80 L8 90 L42 76 Z" fill="url(#sheen)"/>
+        <path d="M30 64 L6 94 L16 96 L40 72 Z" fill="#14101f" opacity=".9"/>
+        <ellipse cx="70" cy="60" rx="40" ry="23" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
+        <ellipse cx="74" cy="70" rx="27" ry="12" fill="#ffffff"/>
+        <path d="M72 82 L68 96 M82 82 L84 96" stroke="#ffd23f" stroke-width="3.5" stroke-linecap="round"/>
+        <g class="wing">
+          <path d="M38 56 Q68 14 118 38 Q90 52 62 68 Z" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
+          <path d="M72 42 Q94 32 112 40 Q94 50 78 57 Z" fill="#ffffff"/>
+          <path d="M44 58 Q70 38 112 40 Q90 54 62 68 Z" fill="url(#sheen)" opacity=".55"/>
+        </g>
+        <circle cx="114" cy="46" r="16" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
+        <path d="M126 41 L152 48 L126 55 Z" fill="#3a3550"/>
+        <circle cx="118" cy="42" r="4.6" fill="#ffffff"/>
+        <circle cx="119.6" cy="42.2" r="2.3" fill="#14101f"/>
+      </g>
+    </g>
+  </g>
+
+</svg>
