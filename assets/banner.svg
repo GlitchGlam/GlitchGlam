@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d">
   <title id="t">GlitchGlam</title>
-  <desc id="d">The word GlitchGlam in big glowing letters that briefly glitch with pink and cyan colour splits. A small magpie swoops across, dips in front of the letters and loops the loop.</desc>
+  <desc id="d">The word GlitchGlam in big glowing letters that briefly glitch with pink and cyan colour splits. A small magpie swoops in, dives in front of the letters, loops the loop above them and flies out, leaving a trail of sparkles.</desc>
 
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -13,9 +13,15 @@
       <stop offset="1"   stop-color="#4df0ff"/>
     </linearGradient>
     <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0"  stop-color="#7b2cff"/>
-      <stop offset=".5" stop-color="#1d9bff"/>
-      <stop offset="1"  stop-color="#19f0a8"/>
+      <stop class="sh1" offset="0"  stop-color="#7b2cff"/>
+      <stop class="sh2" offset=".5" stop-color="#1d9bff"/>
+      <stop class="sh3" offset="1"  stop-color="#19f0a8"/>
+    </linearGradient>
+    <radialGradient id="torso" cx=".35" cy=".3" r=".85">
+      <stop offset="0" stop-color="#3a3060"/><stop offset="1" stop-color="#14101f"/>
+    </radialGradient>
+    <linearGradient id="bill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d6deec"/><stop offset=".7" stop-color="#b3bdd2"/><stop offset="1" stop-color="#8f9ab4"/>
     </linearGradient>
     <linearGradient id="sweep" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity="0"/>
@@ -33,39 +39,96 @@
       <feGaussianBlur stdDeviation="11" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="birdglow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+  <!-- The magpie, drawn once and reused for the bird and its afterimages. -->
+  <g id="magpie">
+    <!-- far wing, behind the body -->
+    <g transform="translate(8 -6) rotate(22 78 50)" opacity=".92">
+      <g class="far">
+        <g stroke-linecap="round" fill="none"><path d="M52 42 L16 24 M52 42 L13 32 M52 42 L15 40 M52 42 L20 48" stroke="#1a1430" stroke-width="5.2"/></g>
+        <path d="M82 50 C74 40 62 36 50 36 C46 40 46 46 52 50 C60 56 72 60 80 58 Z" fill="#1a1430"/>
+      </g>
+    </g>
+    <!-- tail: a black fan with a white base -->
+    <g class="tail" stroke-linecap="round" fill="none">
+      <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#5a4fa0" stroke-width="8.4"/>
+      <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#14101f" stroke-width="7"/>
+      <path d="M50 64 L35 66 M50 66 L36 70.6 M50 68 L38 75" stroke="#ffffff" stroke-width="7"/>
+    </g>
+    <!-- body, white back and nape, head -->
+    <path d="M36 64 C38 48 58 40 82 42 C100 44 110 54 106 66 C102 78 80 86 58 82 C44 80 35 74 36 64 Z" fill="url(#torso)" stroke="#5a4fa0" stroke-width="1.2"/>
+    <path d="M62 44 C72 38 88 38 98 44 C101 46 101 50 98 52 C90 48 76 48 64 52 C59 50 59 46 62 44 Z" fill="#ffffff"/>
+    <circle cx="112" cy="46" r="15.5" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
+    <path d="M98 38 C100 31 109 29 115 32 C108 34 103 40 102 49 C98 47 96 42 98 38 Z" fill="#ffffff"/>
+    <!-- near wing: the feather fan and the arm morph between up, mid and down -->
+    <g class="wing">
+      <g stroke-linecap="round" fill="none">
+        <path class="fan fan-rim" d="M56 42 L14.0 17.0 M56 42 L11.0 26.0 M56 42 L12.0 35.0 M56 42 L16.0 44.0 M56 42 L22.0 52.0 M56 42 L30.0 58.0" stroke="#5a4fa0" stroke-width="7.4"/>
+        <path class="fan fan-ink" d="M56 42 L14.0 17.0 M56 42 L11.0 26.0 M56 42 L12.0 35.0 M56 42 L16.0 44.0 M56 42 L22.0 52.0 M56 42 L30.0 58.0" stroke="#14101f" stroke-width="6"/>
+        <path class="fan fan-sheen" d="M56 42 L14.0 17.0 M56 42 L11.0 26.0 M56 42 L12.0 35.0 M56 42 L16.0 44.0 M56 42 L22.0 52.0 M56 42 L30.0 58.0" stroke="url(#sheen)" stroke-width="1.6" opacity=".55"/>
+      </g>
+      <path class="arm arm-ink" d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
+      <path class="arm arm-sheen" d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="url(#sheen)" opacity=".3"/>
+      <path class="arm arm-white" d="M84 50 C77 41 67 37 58 36 C59 44 66 54 79 60 L83 56 Z" fill="#ffffff"/>
+    </g>
+    <!-- bill and eye -->
+    <path d="M124 41 C134 41 147 46 152 52 C145 51 134 52 125 54 Z" fill="url(#bill)"/>
+    <path d="M125 54 C134 52 144 53 148 55 C140 58 132 58 125 56 Z" fill="#9ea9c1"/>
+    <path d="M146 49 L153 52 L148 55 Z" fill="#2b2840"/>
+    <circle cx="132" cy="44.5" r="0.9" fill="#6f7a95"/>
+    <circle cx="118" cy="43" r="4.8" fill="#7a2e12"/>
+    <circle cx="118.6" cy="43" r="2.5" fill="#0d0a14"/>
+    <circle cx="119.6" cy="41.9" r="0.9" fill="#ffffff"/>
+    <ellipse class="lid" cx="118" cy="43" rx="5.2" ry="5.2" fill="#14101f"/>
+  </g>
   </defs>
 
   <style>
     text { font-family: "Avenir Next", "Trebuchet MS", Verdana, system-ui, sans-serif; }
-    .cy { transform: translate(-3px, 0); }
-    .mg { transform: translate(3px, 0); }
-    /* The flight path: in from the left, a swoop down in front of the letters, up and over, a second dip, out to the right.
-       The bird turns with the path (offset-rotate: auto). With motion off it rests part-way along it. */
-    .bird {
-      offset-path: path("M -220 60 C 80 40, 240 215, 420 205 C 580 196, 640 70, 820 70 C 990 70, 1060 225, 1420 130");
+    .cy { transform: translate(0, 0); }
+    .mg { transform: translate(0, 0); }
+
+    /* Everything on the flight path shares it. The bird turns with the path, so it rolls through the loop. */
+    .bird, .ghost, .spark {
+      offset-path: path("M -220 70 C 60 50, 230 212, 400 202 C 520 196, 570 64, 650 62 C 712 62, 736 128, 690 142 C 640 150, 616 86, 672 66 C 740 44, 860 92, 940 100 C 1050 112, 1150 150, 1420 110");
       offset-rotate: auto;
       offset-distance: 58%;
     }
     .flip { transform-box: fill-box; transform-origin: 50% 50%; }
-    .wing { transform-origin: 78px 50px; }
+    .wing { transform-origin: 56px 42px; }
     .far  { transform-origin: 78px 50px; }
     .tail { transform-origin: 50px 66px; }
+    .lid  { transform-origin: 118px 43px; transform: scaleY(0); }
+    .ghost, .spark { visibility: hidden; }       /* only exist while things move */
+    .spark circle { transform: translate(var(--dx), var(--dy)); }
 
     /* All motion is opt-out: it only runs for people who have not asked for less. */
     @media (prefers-reduced-motion: no-preference) {
       .b1 { animation: d1 13s ease-in-out infinite alternate; }
       .b2 { animation: d2 17s ease-in-out infinite alternate; }
       .b3 { animation: d3 15s ease-in-out infinite alternate; }
-      .cy { animation: glc 6s steps(1, end) infinite; }
-      .mg { animation: glm 6s steps(1, end) infinite; }
-      .main { animation: glt 6s steps(1, end) infinite; }
+      .cy { animation: glc 18s steps(1, end) infinite; }
+      .mg { animation: glm 18s steps(1, end) infinite; }
+      .main { animation: glt 18s steps(1, end) infinite; }
       .scan { animation: scan 7s linear infinite; }
-      .bird { animation: fly 18s linear infinite; }
-      .flip { animation: flip 18s linear infinite; }
+      .bird, .ghost, .spark { animation: fly 18s linear infinite; }
+      .ghost, .spark { visibility: visible; }
+      .spark circle { animation: twinkle 0.8s ease-in-out infinite alternate; }
       .bob  { animation: bob 1.3s ease-in-out infinite alternate; }
-      .wing { animation: flap 0.26s ease-in-out infinite alternate; }
-      .far  { animation: flap 0.26s ease-in-out infinite alternate-reverse; }
+      .wing { animation: bank 0.26s ease-in-out infinite alternate; }
+      .far  { animation: bank 0.26s ease-in-out infinite alternate-reverse; }
+      .fan  { animation: fan-flap 0.52s ease-in-out infinite; }
+      .arm-ink, .arm-sheen { animation: arm-flap 0.52s ease-in-out infinite; }
+      .arm-white { animation: white-flap 0.52s ease-in-out infinite; }
       .tail { animation: wag 0.5s ease-in-out infinite alternate; }
+      .lid  { animation: blink 4.6s steps(1, end) infinite; }
+      .sh1 { animation: shimmer1 2.4s linear infinite; }
+      .sh2 { animation: shimmer2 2.4s linear infinite; }
+      .sh3 { animation: shimmer3 2.4s linear infinite; }
       .tw   { animation: tw 2.6s ease-in-out infinite; }
       .tw:nth-of-type(2n) { animation-delay: 0.9s; }
       .tw:nth-of-type(3n) { animation-delay: 1.7s; }
@@ -75,36 +138,45 @@
     @keyframes d3 { to { transform: translate(140px, -50px); } }
     @keyframes scan { from { transform: translateY(-120px); } to { transform: translateY(330px); } }
     @keyframes fly  { from { offset-distance: 0%; } to { offset-distance: 100%; } }
-    /* One loop the loop at the top of the climb, over the middle of the word. */
-    @keyframes flip { 0%, 46% { transform: rotate(0deg); } 54%, 100% { transform: rotate(-360deg); } }
-    @keyframes bob  { to { transform: translateY(14px); } }
-    @keyframes flap { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+    @keyframes bob  { to { transform: translateY(8px); } }
+    @keyframes bank { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
     @keyframes wag  { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+    @keyframes blink { 0%, 92% { transform: scaleY(0); } 94%, 96% { transform: scaleY(1); } 98%, 100% { transform: scaleY(0); } }
+    @keyframes twinkle { from { opacity: 0.15; transform: translate(var(--dx), var(--dy)) scale(0.6); } to { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(1.3); } }
     @keyframes tw   { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+    @keyframes shimmer1 { 0% { stop-color: #7b2cff; } 33% { stop-color: #19f0a8; } 66% { stop-color: #1d9bff; } 100% { stop-color: #7b2cff; } }
+    @keyframes shimmer2 { 0% { stop-color: #1d9bff; } 33% { stop-color: #7b2cff; } 66% { stop-color: #19f0a8; } 100% { stop-color: #1d9bff; } }
+    @keyframes shimmer3 { 0% { stop-color: #19f0a8; } 33% { stop-color: #1d9bff; } 66% { stop-color: #7b2cff; } 100% { stop-color: #19f0a8; } }
+    @keyframes fan-flap { 0%, 100% { d: path("M56 42 L7.2 44.8 M56 42 L9.7 53.9 M56 42 L15.6 60.8 M56 42 L24.0 66.0 M56 42 L33.4 69.3 M56 42 L43.4 69.8"); } 50% { d: path("M56 42 L32.1 -0.7 M56 42 L25.0 5.6 M56 42 L21.4 13.9 M56 42 L20.4 23.7 M56 42 L21.6 33.7 M56 42 L25.5 42.9"); } }
+    @keyframes arm-flap { 0%, 100% { d: path("M84 50 C78 30 66 18 52 14 C46 18 44 26 50 34 C58 44 72 54 82 56 Z"); } 50% { d: path("M84 50 C78 58 64 70 50 74 C44 70 44 62 50 58 C58 54 72 52 82 54 Z"); } }
+    @keyframes white-flap { 0%, 100% { d: path("M84 50 C79 36 70 26 58 22 C58 32 66 44 79 54 L83 52 Z"); } 50% { d: path("M84 50 C78 54 68 60 58 64 C60 58 66 54 79 56 L83 54 Z"); } }
 
-    /* The glitch: quiet for most of the loop, then a short burst of sliced colour channels. */
+    /* The glitch: quiet, then a tear as the bird loops over the letters (about 46% of the flight), and once more near the end. */
     @keyframes glc {
-      0%, 86%  { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
-      87%      { transform: translate(-22px, 2px); clip-path: inset(8% 0 62% 0); }
-      89%      { transform: translate(18px, -2px); clip-path: inset(58% 0 10% 0); }
-      91%      { transform: translate(-12px, 0);  clip-path: inset(30% 0 38% 0); }
-      93%      { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
-      100%     { transform: translate(-3px, 0);  clip-path: inset(0 0 0 0); }
+      0%, 45%  { transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+      46%      { transform: translate(-22px, 2px); clip-path: inset(8% 0 62% 0); }
+      47%      { transform: translate(18px, -2px); clip-path: inset(58% 0 10% 0); }
+      48%      { transform: translate(-12px, 0);  clip-path: inset(30% 0 38% 0); }
+      49%, 86% { transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+      87%      { transform: translate(-18px, 2px); clip-path: inset(12% 0 56% 0); }
+      88%      { transform: translate(14px, 0);   clip-path: inset(60% 0 8% 0); }
+      89%, 100% { transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
     }
     @keyframes glm {
-      0%, 86%  { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
-      87%      { transform: translate(20px, -2px); clip-path: inset(50% 0 18% 0); }
-      89%      { transform: translate(-16px, 2px); clip-path: inset(12% 0 56% 0); }
-      91%      { transform: translate(14px, 0);   clip-path: inset(66% 0 4% 0); }
-      93%      { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
-      100%     { transform: translate(3px, 0);   clip-path: inset(0 0 0 0); }
+      0%, 45%  { transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+      46%      { transform: translate(20px, -2px); clip-path: inset(50% 0 18% 0); }
+      47%      { transform: translate(-16px, 2px); clip-path: inset(12% 0 56% 0); }
+      48%      { transform: translate(14px, 0);   clip-path: inset(66% 0 4% 0); }
+      49%, 86% { transform: translate(0, 0);     clip-path: inset(0 0 0 0); }
+      87%      { transform: translate(16px, -2px); clip-path: inset(48% 0 20% 0); }
+      88%      { transform: translate(-12px, 0);  clip-path: inset(6% 0 64% 0); }
+      89%, 100% { transform: translate(0, 0);    clip-path: inset(0 0 0 0); }
     }
     @keyframes glt {
-      0%, 86%  { transform: translate(0, 0) skewX(0deg); }
-      88%      { transform: translate(6px, 0) skewX(-7deg); }
-      90%      { transform: translate(-5px, 0) skewX(4deg); }
-      92%      { transform: translate(0, 0) skewX(0deg); }
-      100%     { transform: translate(0, 0) skewX(0deg); }
+      0%, 45%, 49%, 86%, 89%, 100% { transform: translate(0, 0) skewX(0deg); }
+      46.5% { transform: translate(6px, 0) skewX(-7deg); }
+      47.5% { transform: translate(-5px, 0) skewX(4deg); }
+      87.5% { transform: translate(5px, 0) skewX(-5deg); }
     }
   </style>
 
@@ -126,7 +198,7 @@
     <path class="tw" d="M1030 100 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/>
   </g>
 
-  <!-- CRT feel sits BEHIND the words, so the text stays crisp and easy to read. -->
+  <!-- CRT feel sits behind the words, so the text stays crisp. -->
   <rect class="scan" x="0" y="0" width="1200" height="120" fill="url(#sweep)"/>
   <rect width="1200" height="300" fill="url(#lines)"/>
 
@@ -138,59 +210,37 @@
     <text class="main" x="600" y="198" fill="url(#ink)">GlitchGlam</text>
   </g>
 
-  <!-- A small magpie. Decorative. -->
-  <g class="bird">
-    <g class="flip">
-    <g class="bob">
-      <g transform="scale(0.85) translate(-80 -55)">
-        <defs>
-          <radialGradient id="torso" cx=".35" cy=".3" r=".85">
-            <stop offset="0" stop-color="#3a3060"/><stop offset="1" stop-color="#14101f"/>
-          </radialGradient>
-          <linearGradient id="bill" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#d6deec"/><stop offset=".7" stop-color="#b3bdd2"/><stop offset="1" stop-color="#8f9ab4"/>
-          </linearGradient>
-        </defs>
-        <!-- Far wing, behind the body, for depth -->
-        <g transform="translate(8 -6) rotate(22 78 50)" opacity=".92">
-          <g class="far">
-            <g stroke-linecap="round" fill="none"><path d="M52 42 L16 24 M52 42 L13 32 M52 42 L15 40 M52 42 L20 48" stroke="#1a1430" stroke-width="5.2"/></g>
-            <path d="M82 50 C74 40 62 36 50 36 C46 40 46 46 52 50 C60 56 72 60 80 58 Z" fill="#1a1430"/>
-          </g>
-        </g>
-        <!-- Tail: a black fan with a white base -->
-        <g class="tail" stroke-linecap="round" fill="none">
-          <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#5a4fa0" stroke-width="8.4"/>
-          <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#14101f" stroke-width="7"/>
-          <path d="M50 64 L35 66 M50 66 L36 70.6 M50 68 L38 75" stroke="#ffffff" stroke-width="7"/>
-        </g>
-        <!-- Body, white back and nape, head -->
-        <path d="M36 64 C38 48 58 40 82 42 C100 44 110 54 106 66 C102 78 80 86 58 82 C44 80 35 74 36 64 Z" fill="url(#torso)" stroke="#5a4fa0" stroke-width="1.2"/>
-        <path d="M62 44 C72 38 88 38 98 44 C101 46 101 50 98 52 C90 48 76 48 64 52 C59 50 59 46 62 44 Z" fill="#ffffff"/>
-        <circle cx="112" cy="46" r="15.5" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
-        <path d="M98 38 C100 31 109 29 115 32 C108 34 103 40 102 49 C98 47 96 42 98 38 Z" fill="#ffffff"/>
-        <!-- Open wing: an arm plus a fan of primary feathers, flapping at the shoulder -->
-        <g class="wing">
-          <g stroke-linecap="round" fill="none">
-            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="#5a4fa0" stroke-width="7.4"/>
-            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="#14101f" stroke-width="6"/>
-            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="url(#sheen)" stroke-width="1.6" opacity=".55"/>
-          </g>
-          <path d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
-          <path d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="url(#sheen)" opacity=".3"/>
-          <path d="M84 50 C77 41 67 37 58 36 C59 44 66 54 79 60 L83 56 Z" fill="#ffffff"/>
-        </g>
-        <!-- Bill and eye -->
-        <path d="M124 41 C134 41 147 46 152 52 C145 51 134 52 125 54 Z" fill="url(#bill)"/>
-        <path d="M125 54 C134 52 144 53 148 55 C140 58 132 58 125 56 Z" fill="#9ea9c1"/>
-        <path d="M146 49 L153 52 L148 55 Z" fill="#2b2840"/>
-        <circle cx="132" cy="44.5" r="0.9" fill="#6f7a95"/>
-        <circle cx="118" cy="43" r="4.8" fill="#7a2e12"/>
-        <circle cx="118.6" cy="43" r="2.5" fill="#0d0a14"/>
-        <circle cx="119.6" cy="41.9" r="0.9" fill="#ffffff"/>
-      </g>
-    </g>
-    </g>
+  <!-- The sparkle trail: each spark follows the same path a little behind the bird and twinkles. -->
+  <g>
+    <g class="spark" style="animation-delay: 0.12s"><circle r="2.9" fill="#ff2e93" style="--dx: -6.3px; --dy: 20.3px; animation-duration: 0.55s"/></g>
+    <g class="spark" style="animation-delay: 0.19s"><circle r="3.4" fill="#ffe14d" style="--dx: -2.4px; --dy: 7.3px; animation-duration: 0.86s"/></g>
+    <g class="spark" style="animation-delay: 0.26s"><circle r="2.3" fill="#8dff4d" style="--dx: -1.2px; --dy: 7.5px; animation-duration: 0.56s"/></g>
+    <g class="spark" style="animation-delay: 0.33s"><circle r="3.1" fill="#27e8ff" style="--dx: 5.9px; --dy: 8.7px; animation-duration: 0.66s"/></g>
+    <g class="spark" style="animation-delay: 0.40s"><circle r="3.6" fill="#a259ff" style="--dx: 8.1px; --dy: 18.7px; animation-duration: 0.78s"/></g>
+    <g class="spark" style="animation-delay: 0.47s"><circle r="4.3" fill="#ffffff" style="--dx: -8.2px; --dy: 24.9px; animation-duration: 0.70s"/></g>
+    <g class="spark" style="animation-delay: 0.54s"><circle r="2.5" fill="#ff2e93" style="--dx: -6.9px; --dy: 12.8px; animation-duration: 1.07s"/></g>
+    <g class="spark" style="animation-delay: 0.61s"><circle r="2.6" fill="#ffe14d" style="--dx: 1.5px; --dy: 20.1px; animation-duration: 0.76s"/></g>
+    <g class="spark" style="animation-delay: 0.68s"><circle r="3.4" fill="#8dff4d" style="--dx: -7.9px; --dy: 7.3px; animation-duration: 0.64s"/></g>
+    <g class="spark" style="animation-delay: 0.75s"><circle r="3.7" fill="#27e8ff" style="--dx: -1.3px; --dy: 12.9px; animation-duration: 0.91s"/></g>
+    <g class="spark" style="animation-delay: 0.82s"><circle r="3.2" fill="#a259ff" style="--dx: -3.6px; --dy: 23.5px; animation-duration: 0.99s"/></g>
+    <g class="spark" style="animation-delay: 0.89s"><circle r="2.7" fill="#ffffff" style="--dx: 1.3px; --dy: 17.6px; animation-duration: 1.11s"/></g>
+    <g class="spark" style="animation-delay: 0.96s"><circle r="3.8" fill="#ff2e93" style="--dx: -3.8px; --dy: 27.6px; animation-duration: 0.58s"/></g>
+    <g class="spark" style="animation-delay: 1.03s"><circle r="3.1" fill="#ffe14d" style="--dx: 4.6px; --dy: 9.3px; animation-duration: 0.84s"/></g>
   </g>
 
+  <!-- Afterimages: the same bird, a fraction of a second behind, fading. -->
+  <g>
+    <g class="ghost" style="animation-delay: 0.07s; opacity: 0.38"><g class="flip"><g transform="scale(0.85) translate(-80 -55)"><use href="#magpie"/></g></g></g>
+    <g class="ghost" style="animation-delay: 0.14s; opacity: 0.22"><g class="flip"><g transform="scale(0.85) translate(-80 -55)"><use href="#magpie"/></g></g></g>
+    <g class="ghost" style="animation-delay: 0.21s; opacity: 0.1"><g class="flip"><g transform="scale(0.85) translate(-80 -55)"><use href="#magpie"/></g></g></g>
+  </g>
+
+  <!-- The magpie. Decorative. -->
+  <g class="bird" filter="url(#birdglow)">
+    <g class="flip">
+      <g class="bob">
+        <g transform="scale(0.85) translate(-80 -55)"><use href="#magpie"/></g>
+      </g>
+    </g>
+  </g>
 </svg>
