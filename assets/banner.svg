@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d">
   <title id="t">GlitchGlam</title>
-  <desc id="d">The word GlitchGlam in big glowing letters that briefly glitch with pink and cyan colour splits. A small magpie flies across the top.</desc>
+  <desc id="d">The word GlitchGlam in big glowing letters that briefly glitch with pink and cyan colour splits. A small magpie swoops across, dips in front of the letters and loops the loop.</desc>
 
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -39,8 +39,17 @@
     text { font-family: "Avenir Next", "Trebuchet MS", Verdana, system-ui, sans-serif; }
     .cy { transform: translate(-3px, 0); }
     .mg { transform: translate(3px, 0); }
-    .bird { transform: translate(940px, 26px); }
-    .wing { transform-origin: 70px 54px; }
+    /* The flight path: in from the left, a swoop down in front of the letters, up and over, a second dip, out to the right.
+       The bird turns with the path (offset-rotate: auto). With motion off it rests part-way along it. */
+    .bird {
+      offset-path: path("M -220 60 C 80 40, 240 215, 420 205 C 580 196, 640 70, 820 70 C 990 70, 1060 225, 1420 130");
+      offset-rotate: auto;
+      offset-distance: 58%;
+    }
+    .flip { transform-box: fill-box; transform-origin: 50% 50%; }
+    .wing { transform-origin: 78px 50px; }
+    .far  { transform-origin: 78px 50px; }
+    .tail { transform-origin: 50px 66px; }
 
     /* All motion is opt-out: it only runs for people who have not asked for less. */
     @media (prefers-reduced-motion: no-preference) {
@@ -51,9 +60,12 @@
       .mg { animation: glm 6s steps(1, end) infinite; }
       .main { animation: glt 6s steps(1, end) infinite; }
       .scan { animation: scan 7s linear infinite; }
-      .bird { animation: fly 20s linear infinite; }
+      .bird { animation: fly 18s linear infinite; }
+      .flip { animation: flip 18s linear infinite; }
       .bob  { animation: bob 1.3s ease-in-out infinite alternate; }
       .wing { animation: flap 0.26s ease-in-out infinite alternate; }
+      .far  { animation: flap 0.26s ease-in-out infinite alternate-reverse; }
+      .tail { animation: wag 0.5s ease-in-out infinite alternate; }
       .tw   { animation: tw 2.6s ease-in-out infinite; }
       .tw:nth-of-type(2n) { animation-delay: 0.9s; }
       .tw:nth-of-type(3n) { animation-delay: 1.7s; }
@@ -62,9 +74,12 @@
     @keyframes d2 { to { transform: translate(-240px, -30px); } }
     @keyframes d3 { to { transform: translate(140px, -50px); } }
     @keyframes scan { from { transform: translateY(-120px); } to { transform: translateY(330px); } }
-    @keyframes fly  { from { transform: translate(-220px, 40px); } to { transform: translate(1320px, 18px); } }
+    @keyframes fly  { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    /* One loop the loop at the top of the climb, over the middle of the word. */
+    @keyframes flip { 0%, 46% { transform: rotate(0deg); } 54%, 100% { transform: rotate(-360deg); } }
     @keyframes bob  { to { transform: translateY(14px); } }
-    @keyframes flap { from { transform: rotate(-28deg) scaleY(1.1); } to { transform: rotate(22deg) scaleY(0.8); } }
+    @keyframes flap { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+    @keyframes wag  { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
     @keyframes tw   { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
 
     /* The glitch: quiet for most of the loop, then a short burst of sliced colour channels. */
@@ -125,23 +140,56 @@
 
   <!-- A small magpie. Decorative. -->
   <g class="bird">
+    <g class="flip">
     <g class="bob">
-      <g transform="scale(0.62)">
-        <path d="M34 60 L2 80 L8 90 L42 76 Z" fill="url(#sheen)"/>
-        <path d="M30 64 L6 94 L16 96 L40 72 Z" fill="#14101f" opacity=".9"/>
-        <ellipse cx="70" cy="60" rx="40" ry="23" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
-        <ellipse cx="74" cy="70" rx="27" ry="12" fill="#ffffff"/>
-        <path d="M72 82 L68 96 M82 82 L84 96" stroke="#ffd23f" stroke-width="3.5" stroke-linecap="round"/>
-        <g class="wing">
-          <path d="M38 56 Q68 14 118 38 Q90 52 62 68 Z" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
-          <path d="M72 42 Q94 32 112 40 Q94 50 78 57 Z" fill="#ffffff"/>
-          <path d="M44 58 Q70 38 112 40 Q90 54 62 68 Z" fill="url(#sheen)" opacity=".55"/>
+      <g transform="scale(0.85) translate(-80 -55)">
+        <defs>
+          <radialGradient id="torso" cx=".35" cy=".3" r=".85">
+            <stop offset="0" stop-color="#3a3060"/><stop offset="1" stop-color="#14101f"/>
+          </radialGradient>
+          <linearGradient id="bill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#d6deec"/><stop offset=".7" stop-color="#b3bdd2"/><stop offset="1" stop-color="#8f9ab4"/>
+          </linearGradient>
+        </defs>
+        <!-- Far wing, behind the body, for depth -->
+        <g transform="translate(8 -6) rotate(22 78 50)" opacity=".92">
+          <g class="far">
+            <g stroke-linecap="round" fill="none"><path d="M52 42 L16 24 M52 42 L13 32 M52 42 L15 40 M52 42 L20 48" stroke="#1a1430" stroke-width="5.2"/></g>
+            <path d="M82 50 C74 40 62 36 50 36 C46 40 46 46 52 50 C60 56 72 60 80 58 Z" fill="#1a1430"/>
+          </g>
         </g>
-        <circle cx="114" cy="46" r="16" fill="#14101f" stroke="#27e8ff" stroke-width="2"/>
-        <path d="M126 41 L152 48 L126 55 Z" fill="#3a3550"/>
-        <circle cx="118" cy="42" r="4.6" fill="#ffffff"/>
-        <circle cx="119.6" cy="42.2" r="2.3" fill="#14101f"/>
+        <!-- Tail: a black fan with a white base -->
+        <g class="tail" stroke-linecap="round" fill="none">
+          <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#5a4fa0" stroke-width="8.4"/>
+          <path d="M50 64 L8 70 M50 66 L9 79 M50 68 L16 88" stroke="#14101f" stroke-width="7"/>
+          <path d="M50 64 L35 66 M50 66 L36 70.6 M50 68 L38 75" stroke="#ffffff" stroke-width="7"/>
+        </g>
+        <!-- Body, white back and nape, head -->
+        <path d="M36 64 C38 48 58 40 82 42 C100 44 110 54 106 66 C102 78 80 86 58 82 C44 80 35 74 36 64 Z" fill="url(#torso)" stroke="#5a4fa0" stroke-width="1.2"/>
+        <path d="M62 44 C72 38 88 38 98 44 C101 46 101 50 98 52 C90 48 76 48 64 52 C59 50 59 46 62 44 Z" fill="#ffffff"/>
+        <circle cx="112" cy="46" r="15.5" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
+        <path d="M98 38 C100 31 109 29 115 32 C108 34 103 40 102 49 C98 47 96 42 98 38 Z" fill="#ffffff"/>
+        <!-- Open wing: an arm plus a fan of primary feathers, flapping at the shoulder -->
+        <g class="wing">
+          <g stroke-linecap="round" fill="none">
+            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="#5a4fa0" stroke-width="7.4"/>
+            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="#14101f" stroke-width="6"/>
+            <path d="M56 42 L14 17 M56 42 L11 26 M56 42 L12 35 M56 42 L16 44 M56 42 L22 52 M56 42 L30 58" stroke="url(#sheen)" stroke-width="1.6" opacity=".55"/>
+          </g>
+          <path d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="#14101f" stroke="#5a4fa0" stroke-width="1.2"/>
+          <path d="M84 50 C76 38 62 33 48 34 C43 39 44 47 51 52 C60 59 74 63 82 60 Z" fill="url(#sheen)" opacity=".3"/>
+          <path d="M84 50 C77 41 67 37 58 36 C59 44 66 54 79 60 L83 56 Z" fill="#ffffff"/>
+        </g>
+        <!-- Bill and eye -->
+        <path d="M124 41 C134 41 147 46 152 52 C145 51 134 52 125 54 Z" fill="url(#bill)"/>
+        <path d="M125 54 C134 52 144 53 148 55 C140 58 132 58 125 56 Z" fill="#9ea9c1"/>
+        <path d="M146 49 L153 52 L148 55 Z" fill="#2b2840"/>
+        <circle cx="132" cy="44.5" r="0.9" fill="#6f7a95"/>
+        <circle cx="118" cy="43" r="4.8" fill="#7a2e12"/>
+        <circle cx="118.6" cy="43" r="2.5" fill="#0d0a14"/>
+        <circle cx="119.6" cy="41.9" r="0.9" fill="#ffffff"/>
       </g>
+    </g>
     </g>
   </g>
 

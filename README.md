@@ -6,8 +6,15 @@
 
 <img src="assets/divider-v2.svg" alt="" width="100%">
 
+| Demo | Made with | What happens |
+|---|---|---|
+| [**magpie-season**](https://github.com/GlitchGlam/magpie-season) ([live](https://glitchglam.github.io/magpie-season/)) | JavaScript, CSS, WebGL | A magpie flies over your text and flags over-claim words. |
+| [**off-the-rails**](https://github.com/GlitchGlam/off-the-rails) | Ruby | A terminal train keeps breaking down. Fix the code to get it moving. |
+
+<img src="assets/divider-v2.svg" alt="" width="100%">
+
 <details>
-<summary><b>🔧 How was this banner made?</b></summary>
+<summary><b>How was this banner made?</b></summary>
 
 <br>
 
