@@ -6,15 +6,6 @@
 
 <img src="assets/divider-v2.svg" alt="" width="100%">
 
-| | Demo | Made with | What happens |
-|---|---|---|---|
-| 🐦 | [**magpie-season**](https://github.com/GlitchGlam/magpie-season) | JavaScript, CSS | A magpie swoops on over-claims. |
-| 🚂 | [**off-the-rails**](https://github.com/GlitchGlam/off-the-rails) | Ruby | A choo choo keeps breaking down. Fix it. |
-| 🚨 | **no-em-dash-club** | Go | A rainbow siren for em dashes. *Soon.* |
-| 🌱 | **note-garden** | Rust | A garden grown from your notes. *Soon.* |
-
-<img src="assets/divider-v2.svg" alt="" width="100%">
-
 <details>
 <summary><b>🔧 How was this banner made?</b></summary>
 
